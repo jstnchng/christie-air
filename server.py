@@ -199,7 +199,7 @@ def search_flights():
   flight_query.close()
 
   for row in flights:
-    print list(row)
+    print row
   print("adwear]wer")
 
   context = dict(flight_data = flights)
