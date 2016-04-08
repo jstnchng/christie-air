@@ -189,12 +189,15 @@ def search_flights():
   print(flightID)
   flight_query = g.conn.execute('SELECT * FROM Flights WHERE Flights.flightID = flightID')
   
-  for row in flight_query:
-    print list(row)
-  print("dasdfasdfasdfafdas")
+  # for row in flight_query:
+  #   print list(row)
+  # print("dasdfasdfasdfafdas")
 
   flights = []
+  print type(flight_query)
+  print type(flight_query[0])
   for flight in flight_query:
+    print list(flight)
     flights.append( flight )  # can also be accessed using result[0]
   flight_query.close()
 
