@@ -188,24 +188,11 @@ def search_flights():
   flightID = request.form['flightID']
   print(flightID)
   flight_query = g.conn.execute('SELECT * FROM Flights WHERE Flights.flightID = flightID')
-  
-  # for row in flight_query:
-  #   print list(row)
-  # print("dasdfasdfasdfafdas")
 
   flights = []
-  # print type(flight_query)
   for flight in flight_query:
-    # print flight
-    # print list(flight)
-    # print (" ")
-    flights.append( flight )  # can also be accessed using result[0]
+    flights.append( flight )  
   flight_query.close()
-
-  for row in flights:
-    print row
-  print("adwear]wer")
-  # print(len(flights))
 
   context = dict(flight_data = flights)
   return render_template("search_flights.html", **context)
