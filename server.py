@@ -195,9 +195,10 @@ def search_flights():
 
   flights = []
   print type(flight_query)
-  print type(flight_query[0])
   for flight in flight_query:
+    print flight
     print list(flight)
+    print (" ")
     flights.append( flight )  # can also be accessed using result[0]
   flight_query.close()
 
