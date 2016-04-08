@@ -47,15 +47,15 @@ engine = create_engine(DATABASEURI)
 # Note that this will probably not work if you already have a table named 'test' in your database, containing meaningful data. This is only an example showing you how to run queries in your database using SQLAlchemy.
 #
 
-# engine.execute("""CREATE TABLE IF NOT EXISTS test (
-#   id serial,
-#   name text
-# );""")
-# engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
+engine.execute("""CREATE TABLE IF NOT EXISTS test (
+  id serial,
+  name text
+);""")
+engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
 
-cursor = engine.execute("select * from Flights")
-for row in cursor:
-print list(row)
+# cursor = engine.execute("select * from Flights")
+# for row in cursor:
+#   print list(row)
 
 @app.before_request
 def before_request():
@@ -183,6 +183,17 @@ def add():
 def login():
     abort(401)
     this_is_never_executed()
+
+@app.route('/search_flights')
+def search_flights():
+  flightID = request.form['flightID']
+  flight_query = g.conn.execute('SELECT * FROM Flights WHERE Flights.flightID = flightID')
+  flights = []
+  for flight in flight_query:
+    flights.append( flight )  # can also be accessed using result[0]
+  flight_query.close()
+  context = dict(flight_data = flights)
+  return render_template("index.html", **context)
 
 
 if __name__ == "__main__":

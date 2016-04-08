@@ -8,19 +8,32 @@
 
 
 <body>
-  <h1>Some famous Computer Scientists</h1>
+  <!-- <h1>Some famous Computer Scientists</h1>
   <div>{{data}}</div>
 
   <div>
     {% for n in data %}
     <div>{{n}}</div>
     {% endfor %}
+  </div> -->
+
+  <h1>Matching Flights</h1>
+  <div>{{flight_data}}</div>
+
+  <div>
+    {% for f in flight_data %}
+    <div>{{f}}</div>
+    {% endfor %}
   </div>
 
 <p><a href="another">Go to the other page</a></p>
 
-<form method="POST" action="/add">
+<!-- <form method="POST" action="/add">
 <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
+</form> -->
+
+<form method="POST" action="/search_flights">
+<p>Name of new computer scientist: <input type="text" name="flightID"> <input type="submit" value="Enter"></p>
 </form>
 
 </body>
