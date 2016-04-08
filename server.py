@@ -190,7 +190,7 @@ def search_flights():
   print type(flightID)
   flightID = int(flightID)
   print type(flightID)
-  flight_query = g.conn.execute('SELECT * FROM Flights WHERE Flights.flightid = flightID')
+  flight_query = g.conn.execute('SELECT * FROM Flights WHERE Flights.flightid =' + flightID)
 
   flights = []
   for flight in flight_query:
