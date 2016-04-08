@@ -186,7 +186,9 @@ def login():
 @app.route('/search_flights', methods=['POST'])
 def search_flights():
   flightID = request.form['flightID']
-  # print(flightID)
+  print(flightID)
+  print type(flightID)
+  flightID = int(flightID)
   flight_query = g.conn.execute('SELECT * FROM Flights WHERE Flights.flightid = flightID')
 
   flights = []
