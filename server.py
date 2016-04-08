@@ -191,7 +191,7 @@ def search_flights():
   
   for row in flight_query:
     print list(row)
-  print(" ")
+  print("dasdfasdfasdfafdas")
 
   flights = []
   for flight in flight_query:
@@ -200,6 +200,7 @@ def search_flights():
 
   for row in flights:
     print list(row)
+  print("adwear]wer")
 
   context = dict(flight_data = flights)
   return render_template("search_flights.html", **context)
