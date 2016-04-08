@@ -195,7 +195,7 @@ def search_flights():
 
   flights = []
   for flight in flight_query:
-    flights.append( flight )  # can also be accessed using result[0]
+    flights.append( list(flight) )  # can also be accessed using result[0]
   flight_query.close()
 
   for row in flights:
