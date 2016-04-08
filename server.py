@@ -193,9 +193,7 @@ def search_flights():
     flights.append( flight )  # can also be accessed using result[0]
   flight_query.close()
   context = dict(flight_data = flights)
-  render_template("index.html", **context)
-  return redirect('/')
-
+  return render_template("search_flights.html", **context)
 
 if __name__ == "__main__":
   import click
