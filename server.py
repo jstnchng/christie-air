@@ -195,12 +195,13 @@ def search_flights():
 
   flights = []
   for flight in flight_query:
-    flights.append( list(flight) )  # can also be accessed using result[0]
+    flights.append( flight )  # can also be accessed using result[0]
   flight_query.close()
 
   for row in flights:
     print row
   print("adwear]wer")
+  print(len(flights))
 
   context = dict(flight_data = flights)
   return render_template("search_flights.html", **context)
