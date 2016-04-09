@@ -186,12 +186,10 @@ def login():
 @app.route('/search_flights', methods=['POST'])
 def search_flights():
   flightID = request.form['flightID']
-  print(flightID)
-  print type(flightID)
   flightID = int(flightID)
-  print type(flightID)
 
   query = 'SELECT * FROM Flights WHERE Flights.flightid =' + flightID
+  print type(query)
   flight_query = g.conn.execute(query)
 
   flights = []
