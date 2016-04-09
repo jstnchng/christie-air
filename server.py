@@ -188,7 +188,7 @@ def search_flights():
   flightID = request.form['flightID']
   flightID = int(flightID)
 
-  query = 'SELECT * FROM Flights WHERE Flights.flightid =' + flightID
+  query = 'SELECT * FROM Flights WHERE Flights.flightid =' + str(flightID)
   print type(query)
   flight_query = g.conn.execute(query)
 
