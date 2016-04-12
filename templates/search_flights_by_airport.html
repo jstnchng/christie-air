@@ -10,7 +10,23 @@
 
 <body>
 
-<table id="Flights" summary="Search Flights by Origin and Destination Airport">
+<p>
+    Search Flights by Origin and Destination Airport
+</p>
+
+<p>
+    Airline, Origin, Destination, Departure Time, Arrival Time, Status
+</p>
+
+<div>
+    {% for f in flight_data %}
+        <p>
+            {{f}}
+        </p>
+    {% endfor %}
+</div>
+
+<!-- <table id="Flights" summary="Search Flights by Origin and Destination Airport">
 
 	<caption>Search Flights by Origin and Destination Airport</caption>
     
@@ -34,7 +50,7 @@
 
     </tbody>
 
-</table>
+</table> -->
 
 </body>
 </html>
