@@ -10,57 +10,42 @@
 <body>
   <h1>Christie Air</h1>
 
-  <!-- <h1>Matching Flights</h1>
-  <div>{{flight_data}}</div>
-
-  <div>
-    {% for f in flight_data %}
-    <div>{{f}}</div>
-    {% endfor %}
-  </div> -->
-
-<!-- <p><a href="another">Go to the other page</a></p> -->
-
-<!-- <form method="POST" action="/add">
-<p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
-</form> -->
-
   <h2>Search flights by airport (enter origin and destination)</h2>
   <form method="POST" action="/search_flights_by_airport">
-  <p>Enter origin (req): <input type="text" name="origin"></p>
-  <p>Enter destination (req): <input type="text" name="destination"> <input type="submit" value="Enter"></p>
+  <p>Enter origin (required): <input type="text" name="origin"></p>
+  <p>Enter destination (required): <input type="text" name="destination"> <input type="submit" value="Enter"></p>
   </form>
 
   <h2>Search all flights under a particular airline</h2>
   <form method="POST" action="/search_flights_by_airline">
-  <p>Enter airline: <input type="text" name="airline"> <input type="submit" value="Enter"></p>
+  <p>Enter airline (required): <input type="text" name="airline"> <input type="submit" value="Enter"></p>
   </form>
 
   <h2>Find past ticket records for a customer</h2>
   <form method="POST" action="/search_customers_past_flights">
-  <p>Enter email (opt): <input type="text" name = "email"></p>
-  <p>Enter first name (opt): <input type="text" name = "firstname"></p>
-  <p>Enter last name (opt): <input type="text" name = "lastname"></p>
-  <p>Enter phone number (opt): <input type="text" name="phonenumber"> <input type="submit" value="Enter"></p>
+  <p>Enter email (optional): <input type="text" name = "email"></p>
+  <p>Enter first name (optional): <input type="text" name = "firstname"></p>
+  <p>Enter last name (optional): <input type="text" name = "lastname"></p>
+  <p>Enter phone number (optional): <input type="text" name="phonenumber"> <input type="submit" value="Enter"></p>
   </form>
 
   <h2>Find flights sorted by price</h2>
   <form method="POST" action="/find_cheapest_flight">
-  <p>Enter origin (req): <input type="text" name="origin"></p>
-  <p>Enter destination (req): <input type="text" name="destination"></p>
-  <p>Enter airline (opt): <input type="text" name="airline"></p>
-  <p>Enter departure date (opt): <input type="text" name="departure_date"></p>
-  <p>Enter arrival date (opt): <input type="text" name="arrival_date"> <input type="submit" value="Enter"></p>
+  <p>Enter origin (required): <input type="text" name="origin"></p>
+  <p>Enter destination (required): <input type="text" name="destination"></p>
+  <p>Enter airline (optional): <input type="text" name="airline"></p>
+  <p>Enter departure date (optional): <input type="text" name="departure_date"></p>
+  <p>Enter arrival date (optional): <input type="text" name="arrival_date"> <input type="submit" value="Enter"></p>
   </form>
 
   <h2>Find frequent flyer account information for a customer</h2>
   <form method="POST" action="/search_customer_FFA">
-  <p>Enter customer ID: <input type="text" name="customerID"> <input type="submit" value="Enter"></p>
+  <p>Enter customer ID (required): <input type="text" name="customerID"> <input type="submit" value="Enter"></p>
   </form>
 
   <h2>Search all airplanes owned by a particular airline</h2>
   <form method="POST" action="/search_airlines_airplanes">
-  <p>Enter airline: <input type="text" name="airline"> <input type="submit" value="Enter"></p>
+  <p>Enter airline (required): <input type="text" name="airline"> <input type="submit" value="Enter"></p>
   </form>
 
 </body>

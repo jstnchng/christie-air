@@ -22,17 +22,6 @@ from flask import Flask, request, render_template, g, redirect, Response
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
 
-#
-# The following is a dummy URI that does not connect to a valid database. You will need to modify it to connect to your Part 2 database in order to use the data.
-#
-# XXX: The URI should be in the format of: 
-#
-#     postgresql://USER:PASSWORD@w4111a.eastus.cloudapp.azure.com/proj1part2
-#
-# For example, if you had username gravano and password foobar, then the following line would be:
-#
-#     DATABASEURI = "postgresql://gravano:foobar@w4111a.eastus.cloudapp.azure.com/proj1part2"
-#
 DATABASEURI = "postgresql://jc4137:christiejustin@w4111a.eastus.cloudapp.azure.com/proj1part2"
 
 
@@ -122,32 +111,6 @@ def index():
     names.append(result['name'])  # can also be accessed using result[0]
   cursor.close()
 
-  #
-  # Flask uses Jinja templates, which is an extension to HTML where you can
-  # pass data to a template and dynamically generate HTML based on the data
-  # (you can think of it as simple PHP)
-  # documentation: https://realpython.com/blog/python/primer-on-jinja-templating/
-  #
-  # You can see an example template in templates/index.html
-  #
-  # context are the variables that are passed to the template.
-  # for example, "data" key in the context variable defined below will be 
-  # accessible as a variable in index.html:
-  #
-  #     # will print: [u'grace hopper', u'alan turing', u'ada lovelace']
-  #     <div>{{data}}</div>
-  #     
-  #     # creates a <div> tag for each element in data
-  #     # will print: 
-  #     #
-  #     #   <div>grace hopper</div>
-  #     #   <div>alan turing</div>
-  #     #   <div>ada lovelace</div>
-  #     #
-  #     {% for n in data %}
-  #     <div>{{n}}</div>
-  #     {% endfor %}
-  #
   context = dict(data = names)
 
 
@@ -156,27 +119,6 @@ def index():
   # for example, the below file reads template/index.html
   #
   return render_template("index.html", **context)
-
-#
-# This is an example of a different path.  You can see it at:
-# 
-#     localhost:8111/another
-#
-# Notice that the function name is another() rather than index()
-# The functions for each app.route need to have different names
-#
-@app.route('/another')
-def another():
-  return render_template("another.html")
-
-
-# Example of adding new data to the database
-@app.route('/add', methods=['POST'])
-def add():
-  name = request.form['name']
-  g.conn.execute('INSERT INTO test VALUES (10, %s)', name)
-  return redirect('/')
-
 
 @app.route('/login')
 def login():
