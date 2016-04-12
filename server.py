@@ -170,7 +170,7 @@ def search_customers_past_flights():
   firstname = request.form['firstname']
   firstname_bool = (firstname != '')
 
-  lastname = request.form['firstname']
+  lastname = request.form['lastname']
   lastname_bool = (lastname != '')
 
   phonenumber = request.form['phonenumber']
@@ -200,7 +200,7 @@ def search_customers_past_flights():
     if(phonenumber_bool):
       where_clauses.append('C.phonenumber = ' + phonenumber)
 
-    query += ' WHERE'
+    query += ' WHERE '
     for i in range(len(where_clauses)-1):
       query += where_clauses[i]
       query += '\n AND '
