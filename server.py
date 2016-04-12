@@ -191,7 +191,7 @@ def search_flights_by_airport():
   query = '''
   SELECT F.airline, F.flightnumber, F.origin, F.destination, F.departuretime, F.arrivaltime, F.status 
   FROM Flights F 
-  WHERE F.origin =''' + origin + 'AND F.destination =' + destination
+  WHERE F.origin = \'''' + origin + '\' AND F.destination = \'' + destination + '\''
   flight_query = g.conn.execute(query)
 
   flights = []
@@ -209,7 +209,7 @@ def search_flights_by_airline():
   query = '''
   SELECT F.flightnumber, F.origin, F.destination, F.distance, F.departuretime, F.arrivaltime, F.status 
   FROM Flights F 
-  WHERE F.airline =''' + airline
+  WHERE F.airline = \'''' + airline + '\''
   flight_query = g.conn.execute(query)
 
   flights = []
@@ -223,16 +223,16 @@ def search_flights_by_airline():
 @app.route('/search_customers_past_flights', methods=['POST'])
 def search_customers_past_flights():
   email = request.form['email']
-  email_bool = (email == '')
+  email_bool = (email != '')
 
   firstname = request.form['firstname']
-  firstname_bool = (firstname == '')
+  firstname_bool = (firstname != '')
 
   lastname = request.form['firstname']
-  lastname_bool = (lastname == '')
+  lastname_bool = (lastname != '')
 
   phonenumber = request.form['phonenumber']
-  phonenumber_bool = (phonenumber == '')
+  phonenumber_bool = (phonenumber != '')
   # if(phonenumber_bool):
   #   phonenumber = int(phonenumber)
 
@@ -245,15 +245,22 @@ def search_customers_past_flights():
   ON F.flightid = T.flightid
   '''
 
-  where_clauses = []
-  if(email_bool):
-    where_clauses.append(email)
-  if(firstname_bool):
-    where_clauses.append(firstname)
-  if(lastname_bool):
-    where_clauses.append(lastname)
-  if(phonenumber_bool):
-    where_clauses.append(phonenumber) 
+  if( email_bool or firstname_bool or lastname_bool or phonenumber_bool ):
+    where_clauses = []
+    if(email_bool):
+      where_clauses.append('C.email = \'' + email + '\'')
+    if(firstname_bool):
+      where_clauses.append('C.firstname = \'' + firstname + '\'')
+    if(lastname_bool):
+      where_clauses.append('C.lastname = \'' + lastname + '\'')
+    if(phonenumber_bool):
+      where_clauses.append('C.phonenumber = ' + phonenumber)
+
+    query += 'WHERE'
+    for wc in range(len(where_clauses)-1):
+      query += wc
+      query += '\n AND '
+    query += where_clauses[len(where_clauses)-1]
 
   flight_query = g.conn.execute(query)
 
@@ -265,6 +272,98 @@ def search_customers_past_flights():
   context = dict(flight_data = flights)
   return render_template("search_customers_past_flights.html", **context)
 
+@app.route('/find_cheapest_flight', methods=['POST'])
+def find_cheapest_flight():
+  origin = request.form['origin']
+  origin_bool = (origin != '')
+
+  destination = request.form['destination']
+  destination_bool = (destination != '')
+
+  airline = request.form['airline']
+  airline_bool = (airline != '')
+
+  departure_date = request.form['departure_date']
+  departure_date_bool = (departure_date != '')
+
+  arrival_date = request.form['arrival_date']
+  arrival_date_bool = (arrival_date != '')
+
+  query = '''
+  SELECT T.price, T.class, T.seat, F.airline, F.departureTime, F.arrivalTime, F.origin, F.destination
+  FROM Tickets T
+  JOIN Flights F
+  ON T.flightID = F.flightID
+  '''
+
+  if( origin_bool or destination_bool or airline_bool or departure_date_bool or arrival_date_bool):
+    where_clauses = []
+    if(origin_bool):
+      where_clauses.append('F.origin = \'' + origin + '\'')
+    if(destination_bool):
+      where_clauses.append('F.destination = \'' + destination + '\'')
+    if(airline_bool):
+      where_clauses.append('F.airline = \'' + airline + '\'')
+    if(departure_date_bool):
+      where_clauses.append('F.departureTime::date >= date \'' + departure_date + '\'')
+    if(arrival_date_bool):
+      where_clauses.append('F.arrivalTime::date < date \'' + arrival_date + '\'' + 'interval \'24 hours\'')
+
+    query += 'WHERE'
+    for wc in range(len(where_clauses)-1):
+      query += wc
+      query += '\n AND '
+    query += where_clauses[len(where_clauses)-1]
+
+  flight_query = g.conn.execute(query)
+
+  flights = []
+  for flight in flight_query:
+    flights.append( flight )  
+  flight_query.close()
+
+  context = dict(flight_data = flights)
+  return render_template("find_cheapest_flight.html", **context)
+
+@app.route('/search_customer_FFA', methods=['POST'])
+def search_customer_FFA():
+  customerID = request.form['customerID']
+
+  query = '''
+  SELECT C.firstName, C.lastName, FFA.airline, FFA.mileage
+  FROM FrequentFlyerAccounts FFA
+  JOIN Customers C
+  ON FFA.customerID = C.customerID
+  WHERE FFA.customerID = \'''' + customerID + '\''
+  flight_query = g.conn.execute(query)
+
+  flights = []
+  for flight in flight_query:
+    flights.append( flight )  
+  flight_query.close()
+
+  context = dict(flight_data = flights)
+  return render_template("search_customer_FFA.html", **context)
+
+@app.route('/search_airlines_airplanes', methods=['POST'])
+def search_airlines_airplanes():
+  airline = request.form['airline']
+
+  query = '''
+  SELECT AP.model, AP.capacity, AL.headquarters
+  FROM Airplanes AP
+  JOIN Airlines AL
+  ON AP.companyName = AL.companyName
+  WHERE AP.companyName = \'''' + airline + '\''
+  flight_query = g.conn.execute(query)
+
+  flights = []
+  for flight in flight_query:
+    flights.append( flight )  
+  flight_query.close()
+
+  context = dict(flight_data = flights)
+  return render_template("search_airlines_airplanes.html", **context)
 
 if __name__ == "__main__":
   import click
