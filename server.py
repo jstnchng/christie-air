@@ -200,13 +200,13 @@ def search_customers_past_flights():
     if(phonenumber_bool):
       where_clauses.append('C.phonenumber = ' + phonenumber)
 
-    query += 'WHERE'
-    for wc in range(len(where_clauses)-1):
-      query += wc
+    query += ' WHERE'
+    for i in range(len(where_clauses)-1):
+      query += where_clauses[i]
       query += '\n AND '
     query += where_clauses[len(where_clauses)-1]
 
-  print(query)
+  print query
 
   flight_query = g.conn.execute(query)
 
