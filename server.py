@@ -185,21 +185,21 @@ def login():
 
 @app.route('/search_flights_by_airport', methods=['POST'])
 def search_flights_by_airport():
-  origin = request.form['origin']
-  destination = request.form['destination']
+  # origin = request.form['origin']
+  # destination = request.form['destination']
 
-  query = '''
-  SELECT F.airline, F.flightnumber, F.origin, F.destination, F.departuretime, F.arrivaltime, F.status 
-  FROM Flights F 
-  WHERE F.origin =''' + origin + 'AND F.destination =' + destination
-  flight_query = g.conn.execute(query)
+  # query = '''
+  # SELECT F.airline, F.flightnumber, F.origin, F.destination, F.departuretime, F.arrivaltime, F.status 
+  # FROM Flights F 
+  # WHERE F.origin =''' + origin + 'AND F.destination =' + destination
+  # flight_query = g.conn.execute(query)
 
-  flights = []
-  for flight in flight_query:
-    flights.append( flight )  
-  flight_query.close()
+  # flights = []
+  # for flight in flight_query:
+  #   flights.append( flight )  
+  # flight_query.close()
 
-  context = dict(flight_data = flights)
+  # context = dict(flight_data = flights)
   return render_template("search_flights_by_airport.html")
 
 @app.route('/search_flights_by_airline', methods=['POST'])
