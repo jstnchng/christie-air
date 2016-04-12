@@ -269,14 +269,14 @@ def find_cheapest_flight():
 
 @app.route('/search_customer_FFA', methods=['POST'])
 def search_customer_FFA():
-  customerID = request.form['customerID']
+  customer_email = request.form['customer_email']
 
   query = '''
   SELECT C.firstName, C.lastName, FFA.airline, FFA.mileage
   FROM FrequentFlyerAccounts FFA
   JOIN Customers C
   ON FFA.customerID = C.customerID
-  WHERE FFA.customerID = \'''' + customerID + '\''
+  WHERE C.email = \'''' + customer_email + '\''
   flight_query = g.conn.execute(query)
 
   flights = []
@@ -298,6 +298,8 @@ def search_airlines_airplanes():
   ON AP.companyName = AL.companyName
   WHERE AP.companyName = \'''' + airline + '\''
   flight_query = g.conn.execute(query)
+
+  print(query)
 
   flights = []
   for flight in flight_query:
