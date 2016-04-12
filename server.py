@@ -297,9 +297,9 @@ def search_airlines_airplanes():
   JOIN Airlines AL
   ON AP.companyName = AL.companyName
   WHERE AP.companyName = \'''' + airline + '\''
-  flight_query = g.conn.execute(query)
-
   print(query)
+
+  flight_query = g.conn.execute(query)
 
   flights = []
   for flight in flight_query:
