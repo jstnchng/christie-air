@@ -193,7 +193,7 @@ def search_flights_by_airport():
   query = '''
   SELECT F.airline, F.flightnumber, F.origin, F.destination, F.departuretime, F.arrivaltime, F.status 
   FROM Flights F 
-  WHERE F.origin =''' + origin + ' AND F.destination =' + destination
+  WHERE F.origin = \'''' + origin + '\' AND F.destination = \'' + destination + '\''
   print query
   flight_query = g.conn.execute(query)
 
