@@ -187,6 +187,8 @@ def search_customers_past_flights():
   ON F.flightid = T.flightid
   '''
 
+  print query
+
   if( email_bool or firstname_bool or lastname_bool or phonenumber_bool ):
     where_clauses = []
     if(email_bool):
