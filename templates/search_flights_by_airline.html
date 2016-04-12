@@ -38,11 +38,13 @@ th {
     
     <tbody>
         {% for f in flight_data %}
+            <tr>
             {% for element in f %}
                 <td>
                     {{element}}
                 </td>
             {% endfor %}
+        </tr>
         {% endfor %}
 
     </tbody>
