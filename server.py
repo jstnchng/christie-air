@@ -204,6 +204,8 @@ def search_customers_past_flights():
       query += '\n AND '
     query += where_clauses[len(where_clauses)-1]
 
+  print(query)
+
   flight_query = g.conn.execute(query)
 
   flights = []
