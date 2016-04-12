@@ -8,6 +8,42 @@
 
 
 <body>
+
+<form method="POST" action="/search_flights_by_airport">
+<p>Enter origin: <input type="text" name="origin"></p>
+<p>Enter destination: <input type="text" name="destination"> <input type="submit" value="Enter"></p>
+</form>
+
+<form method="POST" action="/search_flights_by_airline">
+<p>Enter airline: <input type="text" name="airline"> <input type="submit" value="Enter"></p>
+</form>
+
+<form method="POST" action="/search_customers_past_flights">
+<p>Enter customer ID: <input type="text" name="customerID"> <input type="submit" value="Enter"></p>
+</form>
+
+<form method="POST" action="/find_cheapest_flight">
+<p>Enter origin (req): <input type="text" name="origin"></p>
+<p>Enter destination (req): <input type="text" name="destination"> 
+<p>Enter airline (opt): <input type="text" name="airline"></p>
+<p>Enter departure date (opt): <input type="text" name="departure_date"></p>
+<p>Enter arrival date (opt): <input type="text" name="arrival_date"> <input type="submit" value="Enter"></p>
+</form>
+
+<form method="POST" action="/search_customer_FFA">
+<p>Enter customer ID: <input type="text" name="customerID"> <input type="submit" value="Enter"></p>
+</form>
+
+<form method="POST" action="/search_airlines_airplanes">
+<p>Enter airline: <input type="text" name="airline"> <input type="submit" value="Enter"></p>
+</form>
+
+</form>
+
+</body>
+
+</html>
+
   <!-- <h1>Some famous Computer Scientists</h1>
   <div>{{data}}</div>
 
@@ -26,17 +62,8 @@
     {% endfor %}
   </div> -->
 
-<p><a href="another">Go to the other page</a></p>
+<!-- <p><a href="another">Go to the other page</a></p> -->
 
 <!-- <form method="POST" action="/add">
 <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
 </form> -->
-
-<form method="POST" action="/search_flights">
-<p>Enter flight ID: <input type="text" name="flightID"> <input type="submit" value="Enter"></p>
-</form>
-
-</body>
-
-
-</html>
