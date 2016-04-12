@@ -183,13 +183,15 @@ def login():
     abort(401)
     this_is_never_executed()
 
-@app.route('/search_flights', methods=['POST'])
-def search_flights():
-  flightID = request.form['flightID']
-  flightID = int(flightID)
+@app.route('/search_flights_by_airport', methods=['POST'])
+def search_flights_by_airport():
+  origin = request.form['origin']
+  destination = request.form['destination']
 
-  query = 'SELECT * FROM Flights WHERE Flights.flightid =' + str(flightID)
-  print type(query)
+  query = '''
+  SELECT F.airline, F.flightnumber, F.origin, F.destination, F.departuretime, F.arrivaltime, F.status 
+  FROM Flights F 
+  WHERE F.origin =''' + origin + 'AND F.destination =' + destination
   flight_query = g.conn.execute(query)
 
   flights = []
@@ -198,7 +200,71 @@ def search_flights():
   flight_query.close()
 
   context = dict(flight_data = flights)
-  return render_template("search_flights.html", **context)
+  return render_template("search_flights_by_airport.html", **context)
+
+@app.route('/search_flights_by_airline', methods=['POST'])
+def search_flights_by_airline():
+  airline = request.form['airline']
+
+  query = '''
+  SELECT F.flightnumber, F.origin, F.destination, F.distance, F.departuretime, F.arrivaltime, F.status 
+  FROM Flights F 
+  WHERE F.airline =''' + airline
+  flight_query = g.conn.execute(query)
+
+  flights = []
+  for flight in flight_query:
+    flights.append( flight )  
+  flight_query.close()
+
+  context = dict(flight_data = flights)
+  return render_template("search_flights_by_airline.html", **context)
+
+@app.route('/search_customers_past_flights', methods=['POST'])
+def search_customers_past_flights():
+  email = request.form['email']
+  email_bool = (email == '')
+
+  firstname = request.form['firstname']
+  firstname_bool = (firstname == '')
+
+  lastname = request.form['firstname']
+  lastname_bool = (lastname == '')
+
+  phonenumber = request.form['phonenumber']
+  phonenumber_bool = (phonenumber == '')
+  # if(phonenumber_bool):
+  #   phonenumber = int(phonenumber)
+
+  query = '''
+  SELECT C.firstname, C.middlename, C.lastname, C. birthdate, C.gender, C.phonenumber, F.airline, F.flightnumber, F.origin, F.destination, F.distance, F.departuretime, F.arrivaltime, T.class, T.seat, T.price
+  FROM Customers C
+  JOIN Tickets T
+  ON C.customerid = T.customerid
+  JOIN Flights F
+  ON F.flightid = T.flightid
+  '''
+
+  where_clauses = []
+  if(email_bool):
+    where_clauses.append(email)
+  if(firstname_bool):
+    where_clauses.append(firstname)
+  if(lastname_bool):
+    where_clauses.append(lastname)
+  if(phonenumber_bool):
+    where_clauses.append(phonenumber) 
+
+  flight_query = g.conn.execute(query)
+
+  flights = []
+  for flight in flight_query:
+    flights.append( flight )  
+  flight_query.close()
+
+  context = dict(flight_data = flights)
+  return render_template("search_customers_past_flights.html", **context)
+
 
 if __name__ == "__main__":
   import click
