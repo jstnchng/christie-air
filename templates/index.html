@@ -27,8 +27,8 @@
 
   <h2>Search flights by airport (enter origin and destination)</h2>
   <form method="POST" action="/search_flights_by_airport">
-  <p>Enter origin: <input type="text" name="origin"></p>
-  <p>Enter destination: <input type="text" name="destination"> <input type="submit" value="Enter"></p>
+  <p>Enter origin (req): <input type="text" name="origin"></p>
+  <p>Enter destination (req): <input type="text" name="destination"> <input type="submit" value="Enter"></p>
   </form>
 
   <h2>Search all flights under a particular airline</h2>
@@ -38,13 +38,16 @@
 
   <h2>Find past ticket records for a customer</h2>
   <form method="POST" action="/search_customers_past_flights">
-  <p>Enter customer ID: <input type="text" name="customerID"> <input type="submit" value="Enter"></p>
+  <p>Enter email (opt): <input type="text" name = "email"></p>
+  <p>Enter first name (opt): <input type="text" name = "firstname"></p>
+  <p>Enter last name (opt): <input type="text" name = "lastname"></p>
+  <p>Enter phone number (opt): <input type="text" name="phonenumber"> <input type="submit" value="Enter"></p>
   </form>
 
   <h2>Find flights sorted by price</h2>
   <form method="POST" action="/find_cheapest_flight">
   <p>Enter origin (req): <input type="text" name="origin"></p>
-  <p>Enter destination (req): <input type="text" name="destination"> 
+  <p>Enter destination (req): <input type="text" name="destination"></p>
   <p>Enter airline (opt): <input type="text" name="airline"></p>
   <p>Enter departure date (opt): <input type="text" name="departure_date"></p>
   <p>Enter arrival date (opt): <input type="text" name="arrival_date"> <input type="submit" value="Enter"></p>
