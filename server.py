@@ -292,10 +292,10 @@ def search_airlines_airplanes():
   airline = request.form['airline']
 
   query = '''
-  SELECT AP.airline, AP.model, AP.capacity, AL.headquarters
+  SELECT AP.companyname, AP.model, AP.capacity, AL.headquarters
   FROM Airplanes AP
   JOIN Airlines AL
-  ON AP.companyName = AL.companyName
+  ON AP.companyname = AL.companyname
   WHERE AP.companyName = \'''' + airline + '\''
   print(query)
 
