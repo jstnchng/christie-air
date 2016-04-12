@@ -187,8 +187,6 @@ def search_customers_past_flights():
   ON F.flightid = T.flightid
   '''
 
-  print query
-
   if( email_bool or firstname_bool or lastname_bool or phonenumber_bool ):
     where_clauses = []
     if(email_bool):
@@ -205,8 +203,6 @@ def search_customers_past_flights():
       query += where_clauses[i]
       query += '\n AND '
     query += where_clauses[len(where_clauses)-1]
-
-  print query
 
   flight_query = g.conn.execute(query)
 
@@ -255,7 +251,7 @@ def find_cheapest_flight():
     if(arrival_date_bool):
       where_clauses.append('F.arrivalTime::date < date \'' + arrival_date + '\'' + 'interval \'24 hours\'')
 
-    query += 'WHERE'
+    query += ' WHERE '
     for wc in range(len(where_clauses)-1):
       query += wc
       query += '\n AND '
