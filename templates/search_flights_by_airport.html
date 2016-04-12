@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>A Beautiful Table</title>
-<link rel="stylesheet" type="text/css" media="screen" href="css-table.css" />
+<!-- <link rel="stylesheet" type="text/css" media="screen" href="css-table.css" />
 <script type="text/javascript" src="js/jquery-1.2.6.min.js"></script>
-<script type="text/javascript" src="js/style-table.js"></script>
+<script type="text/javascript" src="js/style-table.js"></script> -->
 </head>
 
 <body>
@@ -27,14 +27,11 @@
     
     <tbody>
         {% for f in flight_data %}
-        <div>
-            <tr>
-                <th scope="row">{{f[0]}}</th>
-                {% for i in range(len(f) - 1) %}
-                    <td>{{f[i+1]}}</td>
-                {% endfor %}
-            </tr>
-        </div>
+            {% for element in f %}
+            <p>
+                {{element}}
+            </p>
+            {% endfor %}
         {% endfor %}
 
     </tbody>
