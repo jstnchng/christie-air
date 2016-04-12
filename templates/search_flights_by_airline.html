@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Search Flights by Airline</title>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+th {
+    background-color: #c4d8e2;
+    color: black
+}
+</style>
+</head>
+
+<body>
+
+<table id="Flights" summary="Search Flights by Origin and Destination Airline" style="width:100%">
+
+	<caption><font size="20"><b><strong>Search Flights by Origin and Destination Airline</strong></b></font></caption>
+    <thead>    
+        <tr>
+            <th scope="col">Airline</th>
+            <th scope="col">Flight Number</th>
+            <th scope="col">Origin</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Distance</th>
+            <th scope="col">Departure Time</th>
+            <th scope="col">Arrival Time</th>
+            <th scope="col">Status</th>  
+        </tr>        
+    </thead>
+    
+    <tbody>
+        {% for f in flight_data %}
+            {% for element in f %}
+                <td>
+                    {{element}}
+                </td>
+            {% endfor %}
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+</body>
+</html>

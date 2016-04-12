@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Search Customer's Past Flight Information</title>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+th {
+    background-color: #c4d8e2;
+    color: black
+}
+</style>
+</head>
+
+<body>
+
+<table id="Flights" summary="Search Customer's Past Flight Information" style="width:100%">
+
+    C.firstname, C.middlename, C.lastname, C. birthdate, C.gender, C.phonenumber, F.airline, F.flightnumber, F.origin, F.destination, F.distance, F.departuretime, F.arrivaltime, T.class, T.seat, T.price
+
+	<caption><font size="20"><b><strong>Search Customer's Past Flight Information</strong></b></font></caption>
+    <thead>    
+        <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Middle Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Birthdate</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Airline</th>
+            <th scope="col">Flight Number</th>
+            <th scope="col">Origin</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Distance</th>
+            <th scope="col">Departure Time</th>
+            <th scope="col">Arrival Time</th>
+            <th scope="col">Class</th>  
+            <th scope="col">Seat</th>
+            <th scope="col">Price</th>
+        </tr>        
+    </thead>
+    
+    <tbody>
+        {% for f in flight_data %}
+            {% for element in f %}
+                <td>
+                    {{element}}
+                </td>
+            {% endfor %}
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+</body>
+</html>

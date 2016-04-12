@@ -207,7 +207,7 @@ def search_flights_by_airline():
   airline = request.form['airline']
 
   query = '''
-  SELECT F.flightnumber, F.origin, F.destination, F.distance, F.departuretime, F.arrivaltime, F.status 
+  SELECT F.airline, F.flightnumber, F.origin, F.destination, F.distance, F.departuretime, F.arrivaltime, F.status 
   FROM Flights F 
   WHERE F.airline = \'''' + airline + '\''
   flight_query = g.conn.execute(query)
@@ -350,7 +350,7 @@ def search_airlines_airplanes():
   airline = request.form['airline']
 
   query = '''
-  SELECT AP.model, AP.capacity, AL.headquarters
+  SELECT AP.airline, AP.model, AP.capacity, AL.headquarters
   FROM Airplanes AP
   JOIN Airlines AL
   ON AP.companyName = AL.companyName
