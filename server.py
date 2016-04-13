@@ -175,8 +175,9 @@ def search_customers_past_flights():
 
   phonenumber = request.form['phonenumber']
   phonenumber_bool = (phonenumber != '')
-  # if(phonenumber_bool):
-  #   phonenumber = int(phonenumber)
+  
+  flightnumber = request.form['flightnumber']
+  flightnumber_bool = (flightnumber != '')
 
   query = '''
   SELECT C.firstname, C.middlename, C.lastname, C. birthdate, C.gender, C.phonenumber, F.airline, F.flightnumber, F.origin, F.destination, F.distance, F.departuretime, F.arrivaltime, T.class, T.seat, T.price
@@ -187,7 +188,7 @@ def search_customers_past_flights():
   ON F.flightid = T.flightid
   '''
 
-  if( email_bool or firstname_bool or lastname_bool or phonenumber_bool ):
+  if( email_bool or firstname_bool or lastname_bool or phonenumber_bool or flightnumber_bool ):
     where_clauses = []
     if(email_bool):
       where_clauses.append('C.email = \'' + email + '\'')
@@ -196,7 +197,9 @@ def search_customers_past_flights():
     if(lastname_bool):
       where_clauses.append('C.lastname = \'' + lastname + '\'')
     if(phonenumber_bool):
-      where_clauses.append('C.phonenumber = ' + phonenumber)
+      where_clauses.append('C.phonenumber = \'' + phonenumber + '\'')
+    if(flightnumber_bool):
+      where_clauses.append('F.flightnumber = \'' + flightnumber + '\'')  
 
     query += ' WHERE '
     for i in range(len(where_clauses)-1):
