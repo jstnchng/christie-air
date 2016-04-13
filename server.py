@@ -128,7 +128,6 @@ def search_flights_by_airport():
   FROM Flights F 
   WHERE F.origin = \'''' + origin + '\' AND F.destination = \'' + destination + '\''
   flight_query = g.conn.execute(query)
-  print query
 
   flights = []
   for flight in flight_query:
@@ -136,6 +135,7 @@ def search_flights_by_airport():
   flight_query.close()
 
   context = dict(flight_data = flights)
+  print "Rendering Page"
   return render_template("search_flights_by_airport.html", **context)
 
 @app.route('/search_flights_by_airline', methods=['POST'])
