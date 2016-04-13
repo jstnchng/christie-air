@@ -37,7 +37,10 @@ th {
     </thead>
     
     <tbody>
-        {% if len(flight_data) != 0 %}
+<!--         {% if len(flight_data) != 0 %} -->
+            <script>
+                document.getElementById("query_exist").innerText = "Sorry! None of the records match your query!";
+            </script>
             {% for f in flight_data %}
                 <tr>
                     {% for element in f %}
@@ -47,12 +50,9 @@ th {
                     {% endfor %}
                 </tr>
             {% endfor %}
-            {% end %}
+<!--             {% end %}
         {% else: %}
-            <script>
-                document.getElementById("query_exist").innerText = "Sorry! None of the records match your query!";
-            </script>
-            {% end %}
+            {% end %} -->
     </tbody>
 
 </table>
