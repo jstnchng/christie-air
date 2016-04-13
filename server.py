@@ -14,6 +14,7 @@ A debugger such as "pdb" may be helpful for debugging.
 Read about it online.
 """
 
+import re
 import os
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
@@ -44,6 +45,9 @@ engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'
 # cursor = engine.execute("select * from Flights")
 # for row in cursor:
 #   print list(row)
+
+def sanitize(input):
+  input = re.sub(r'[^ \w,\s,@]', "", input)
 
 @app.before_request
 def before_request():
@@ -128,7 +132,9 @@ def login():
 @app.route('/search_flights_by_airport', methods=['POST'])
 def search_flights_by_airport():
   origin = request.form['origin']
+  origin = sanitize(origin)
   destination = request.form['destination']
+  destination = sanitize(origin)
 
   query = '''
   SELECT F.airline, F.flightnumber, F.origin, F.destination, F.departuretime, F.arrivaltime, F.status 
@@ -147,6 +153,7 @@ def search_flights_by_airport():
 @app.route('/search_flights_by_airline', methods=['POST'])
 def search_flights_by_airline():
   airline = request.form['airline']
+  airline = sanitize(airline)
 
   query = '''
   SELECT F.airline, F.flightnumber, F.origin, F.destination, F.distance, F.departuretime, F.arrivaltime, F.status 
@@ -165,18 +172,23 @@ def search_flights_by_airline():
 @app.route('/search_customers_past_flights', methods=['POST'])
 def search_customers_past_flights():
   email = request.form['email']
+  email = sanitize(email)
   email_bool = (email != '')
 
   firstname = request.form['firstname']
+  firstname = sanitize(firstname)
   firstname_bool = (firstname != '')
 
   lastname = request.form['lastname']
+  lastname = sanitize(lastname)
   lastname_bool = (lastname != '')
 
   phonenumber = request.form['phonenumber']
+  phonenumber = sanitize(phonenumber)
   phonenumber_bool = (phonenumber != '')
   
   flightnumber = request.form['flightnumber']
+  flightnumber = sanitize(flightnumber)
   flightnumber_bool = (flightnumber != '')
 
   query = '''
@@ -220,18 +232,23 @@ def search_customers_past_flights():
 @app.route('/find_cheapest_flight', methods=['POST'])
 def find_cheapest_flight():
   origin = request.form['origin']
+  origin = sanitize(origin)
   origin_bool = (origin != '')
 
   destination = request.form['destination']
+  destination = sanitize(destination)
   destination_bool = (destination != '')
 
   airline = request.form['airline']
+  airline = sanitize(airline)
   airline_bool = (airline != '')
 
   departure_date = request.form['departure_date']
+  departure_date = sanitize(departure_date)
   departure_date_bool = (departure_date != '')
 
   arrival_date = request.form['arrival_date']
+  arrival_date = sanitize(arrival_date)
   arrival_date_bool = (arrival_date != '')
 
   query = '''
@@ -275,6 +292,7 @@ def find_cheapest_flight():
 @app.route('/search_customer_FFA', methods=['POST'])
 def search_customer_FFA():
   customer_email = request.form['customer_email']
+  customer_email = sanitize(customer_email)
 
   query = '''
   SELECT C.firstName, C.lastName, FFA.airline, FFA.mileage
@@ -295,6 +313,7 @@ def search_customer_FFA():
 @app.route('/search_airlines_airplanes', methods=['POST'])
 def search_airlines_airplanes():
   airline = request.form['airline']
+  airline = sanitize(airline)
 
   query = '''
   SELECT AP.companyname, AP.model, AP.capacity, AL.headquarters
@@ -317,12 +336,15 @@ def search_airlines_airplanes():
 @app.route('/find_flight_info', methods=['POST'])
 def find_flight_info():
   origin = request.form['origin']
+  origin = sanitize(origin)
   origin_bool = (origin != '')
 
   destination = request.form['destination']
+  destination = sanitize(destination)
   destination_bool = (destination != '')
 
   flightnumber = request.form['flightnumber']
+  flightnumber = sanitize(flightnumber)
   flightnumber_bool = (flightnumber != '')
 
   query = '''
