@@ -276,6 +276,8 @@ def find_cheapest_flight():
 
   query += ' ORDER BY T.price'
 
+  print query
+
   flight_query = g.conn.execute(query)
 
   flights = []
