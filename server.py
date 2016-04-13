@@ -335,7 +335,7 @@ def find_flight_info():
     if(origin_bool):
       where_clauses.append('F.origin = \'' + origin + '\'')
     if(destination_bool):
-      where_clauses.append('F.destination = \'' + destinatio + '\'')
+      where_clauses.append('F.destination = \'' + destination + '\'')
     if(flightnumber_bool):
       where_clauses.append('F.flightnumber = \'' + flightnumber + '\'')  
 
