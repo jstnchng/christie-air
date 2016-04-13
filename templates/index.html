@@ -13,7 +13,13 @@
 
   <h2>Search flights by airport (enter origin and destination)</h2>
   <form method="POST" action="/search_flights_by_airport">
-  <p>Enter origin (required): <input type="text" name="origin"></p>
+  <!-- <p>Enter origin (required): <input type="text" name="origin"></p> -->
+  <p>
+  <select name = "Origin">
+    <option value="TPE">TPE</option>
+    <option value="JFK">JFK</option>
+  </select>
+  </p>
   <p>Enter destination (required): <input type="text" name="destination"> <input type="submit" value="Enter"></p>
   </form>
 
