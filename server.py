@@ -121,7 +121,7 @@ def search_flights_by_airport():
   origin = request.form['origin']
   origin = sanitize(origin)
   destination = request.form['destination']
-  destination = sanitize(origin)
+  destination = sanitize(destination)
 
   query = '''
   SELECT F.airline, F.flightnumber, F.origin, F.destination, F.departuretime, F.arrivaltime, F.status 
