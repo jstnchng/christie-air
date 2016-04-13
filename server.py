@@ -37,7 +37,7 @@ engine = create_engine(DATABASEURI)
 #
 
 def sanitize(input):
-  input = re.sub(r'[^ \w,\s,@,-,\.,/]', "", input)
+  input = re.sub(r'[^ \w,\s,@,\-,\.,/]', "", input)
   return input
 
 @app.before_request
