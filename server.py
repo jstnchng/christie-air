@@ -36,16 +36,6 @@ engine = create_engine(DATABASEURI)
 # Note that this will probably not work if you already have a table named 'test' in your database, containing meaningful data. This is only an example showing you how to run queries in your database using SQLAlchemy.
 #
 
-engine.execute("""CREATE TABLE IF NOT EXISTS test (
-  id serial,
-  name text
-);""")
-engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
-
-# cursor = engine.execute("select * from Flights")
-# for row in cursor:
-#   print list(row)
-
 def sanitize(input):
   input = re.sub(r'[^ \w,\s,@,-,\.,]', "", input)
   return input
@@ -91,6 +81,7 @@ def teardown_request(exception):
 # see for routing: http://flask.pocoo.org/docs/0.10/quickstart/#routing
 # see for decorators: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 #
+
 @app.route('/')
 def index():
   """
@@ -124,11 +115,6 @@ def index():
   # for example, the below file reads template/index.html
   #
   return render_template("index.html", **context)
-
-@app.route('/login')
-def login():
-    abort(401)
-    this_is_never_executed()
 
 @app.route('/search_flights_by_airport', methods=['POST'])
 def search_flights_by_airport():
