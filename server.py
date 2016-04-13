@@ -314,6 +314,47 @@ def search_airlines_airplanes():
   context = dict(flight_data = flights)
   return render_template("search_airlines_airplanes.html", **context)
 
+@app.route('/find_flight_info', methods=['POST'])
+def find_flight_info():
+  origin = request.form['origin']
+  origin_bool = (origin != '')
+
+  destination = request.form['destination']
+  destination_bool = (destination != '')
+
+  flightnumber = request.form['flightnumber']
+  flightnumber_bool = (flightnumber != '')
+
+  query = '''
+  SELECT F.airline, F.flightnumber, F.origin, F.destination, F.departuretime, F.arrivaltime, F.status
+  FROM Flights F
+  '''
+
+  if( origin_bool or destination_bool or flightnumber_bool ):
+    where_clauses = []
+    if(origin_bool):
+      where_clauses.append('F.origin = \'' + origin + '\'')
+    if(destination_bool):
+      where_clauses.append('F.destination = \'' + destinatio + '\'')
+    if(flightnumber_bool):
+      where_clauses.append('F.flightnumber = \'' + flightnumber + '\'')  
+
+    query += ' WHERE '
+    for i in range(len(where_clauses)-1):
+      query += where_clauses[i]
+      query += '\n AND '
+    query += where_clauses[len(where_clauses)-1]
+
+  flight_query = g.conn.execute(query)
+
+  flights = []
+  for flight in flight_query:
+    flights.append( flight )  
+  flight_query.close()
+
+  context = dict(flight_data = flights)
+  return render_template("find_flight_info.html", **context)
+
 if __name__ == "__main__":
   import click
 
