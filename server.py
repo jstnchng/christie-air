@@ -156,8 +156,11 @@ def search_flights_by_airline():
     flights.append( flight )  
   flight_query.close()
 
-  context = dict(flight_data = flights)
-  return render_template("search_flights_by_airline.html", **context)
+  if len(flights) == 0:
+    return render_template("no_results.html")
+  else:
+    context = dict(flight_data = flights)
+    return render_template("search_flights_by_airport.html", **context)
 
 @app.route('/search_customers_past_flights', methods=['POST'])
 def search_customers_past_flights():
@@ -216,8 +219,12 @@ def search_customers_past_flights():
     flights.append( flight )  
   flight_query.close()
 
-  context = dict(flight_data = flights)
-  return render_template("search_customers_past_flights.html", **context)
+
+  if len(flights) == 0:
+    return render_template("no_results.html")
+  else:
+    context = dict(flight_data = flights)
+    return render_template("search_flights_by_airport.html", **context)
 
 @app.route('/find_cheapest_flight', methods=['POST'])
 def find_cheapest_flight():
@@ -276,8 +283,11 @@ def find_cheapest_flight():
     flights.append( flight )  
   flight_query.close()
 
-  context = dict(flight_data = flights)
-  return render_template("find_cheapest_flight.html", **context)
+  if len(flights) == 0:
+    return render_template("no_results.html")
+  else:
+    context = dict(flight_data = flights)
+    return render_template("search_flights_by_airport.html", **context)
 
 @app.route('/search_customer_FFA', methods=['POST'])
 def search_customer_FFA():
@@ -297,8 +307,11 @@ def search_customer_FFA():
     flights.append( flight )  
   flight_query.close()
 
-  context = dict(flight_data = flights)
-  return render_template("search_customer_FFA.html", **context)
+  if len(flights) == 0:
+    return render_template("no_results.html")
+  else:
+    context = dict(flight_data = flights)
+    return render_template("search_flights_by_airport.html", **context)
 
 @app.route('/search_airlines_airplanes', methods=['POST'])
 def search_airlines_airplanes():
@@ -319,8 +332,11 @@ def search_airlines_airplanes():
     flights.append( flight )  
   flight_query.close()
 
-  context = dict(flight_data = flights)
-  return render_template("search_airlines_airplanes.html", **context)
+  if len(flights) == 0:
+    return render_template("no_results.html")
+  else:
+    context = dict(flight_data = flights)
+    return render_template("search_flights_by_airport.html", **context)
 
 @app.route('/find_flight_info', methods=['POST'])
 def find_flight_info():
@@ -363,8 +379,11 @@ def find_flight_info():
     flights.append( flight )  
   flight_query.close()
 
-  context = dict(flight_data = flights)
-  return render_template("find_flight_info.html", **context)
+  if len(flights) == 0:
+    return render_template("no_results.html")
+  else:
+    context = dict(flight_data = flights)
+    return render_template("search_flights_by_airport.html", **context)
 
 if __name__ == "__main__":
   import click
