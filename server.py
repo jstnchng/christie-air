@@ -37,7 +37,7 @@ engine = create_engine(DATABASEURI)
 #
 
 def sanitize(input):
-  input = re.sub(r'[^ \w,\s,@,-,\.,]', "", input)
+  input = re.sub(r'[^ \w,\s,@,-,\.,/]', "", input)
   return input
 
 @app.before_request
@@ -160,7 +160,7 @@ def search_flights_by_airline():
     return render_template("no_results.html")
   else:
     context = dict(flight_data = flights)
-    return render_template("search_flights_by_airport.html", **context)
+    return render_template("search_flights_by_airline.html", **context)
 
 @app.route('/search_customers_past_flights', methods=['POST'])
 def search_customers_past_flights():
@@ -224,7 +224,7 @@ def search_customers_past_flights():
     return render_template("no_results.html")
   else:
     context = dict(flight_data = flights)
-    return render_template("search_flights_by_airport.html", **context)
+    return render_template("search_customers_past_flights.html", **context)
 
 @app.route('/find_cheapest_flight', methods=['POST'])
 def find_cheapest_flight():
@@ -287,7 +287,7 @@ def find_cheapest_flight():
     return render_template("no_results.html")
   else:
     context = dict(flight_data = flights)
-    return render_template("search_flights_by_airport.html", **context)
+    return render_template("find_cheapest_flight.html", **context)
 
 @app.route('/search_customer_FFA', methods=['POST'])
 def search_customer_FFA():
@@ -311,7 +311,7 @@ def search_customer_FFA():
     return render_template("no_results.html")
   else:
     context = dict(flight_data = flights)
-    return render_template("search_flights_by_airport.html", **context)
+    return render_template("search_customer_FFA.html", **context)
 
 @app.route('/search_airlines_airplanes', methods=['POST'])
 def search_airlines_airplanes():
@@ -336,7 +336,7 @@ def search_airlines_airplanes():
     return render_template("no_results.html")
   else:
     context = dict(flight_data = flights)
-    return render_template("search_flights_by_airport.html", **context)
+    return render_template("search_airlines_airplanes.html", **context)
 
 @app.route('/find_flight_info', methods=['POST'])
 def find_flight_info():
@@ -383,7 +383,7 @@ def find_flight_info():
     return render_template("no_results.html")
   else:
     context = dict(flight_data = flights)
-    return render_template("search_flights_by_airport.html", **context)
+    return render_template("find_flight_info.html", **context)
 
 if __name__ == "__main__":
   import click
