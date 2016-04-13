@@ -133,9 +133,9 @@ def search_flights_by_airport():
   for flight in flight_query:
     flights.append( flight )  
   flight_query.close()
-  print flights
+  print len(flights)
+
   context = dict(flight_data = flights)
-  print "Rendering Page"
   return render_template("search_flights_by_airport.html", **context)
 
 @app.route('/search_flights_by_airline', methods=['POST'])
