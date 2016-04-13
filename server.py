@@ -47,7 +47,8 @@ engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'
 #   print list(row)
 
 def sanitize(input):
-  input = re.sub(r'[^ \w,\s,@]', "", input)
+  input = re.sub(r'[^ \w,\s,@,-,\.,]', "", input)
+  return input
 
 @app.before_request
 def before_request():
