@@ -266,7 +266,7 @@ def find_cheapest_flight():
     if(departure_date_bool):
       where_clauses.append('F.departureTime::date >= date \'' + departure_date + '\'')
     if(arrival_date_bool):
-      where_clauses.append('F.arrivalTime::date < date \'' + arrival_date + '\'' + 'interval \'24 hours\'')
+      where_clauses.append('F.arrivalTime::date < date \'' + arrival_date + '\'' + ' + interval \'24 hours\'')
 
     query += ' WHERE '
     for wc in range(len(where_clauses)-1):
